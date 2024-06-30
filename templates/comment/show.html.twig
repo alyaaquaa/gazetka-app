@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    <trans-unit id="title.comment_details">
+        <source>title.comment_details</source>
+        <target>Comment details #%id%</target>
+    </trans-unit>
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.comment_details'|trans({'%id%': comment.id|default('')}) }}</h1>
+    {% if comment is defined and comment|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ comment.id }}</dd>
+            <dt>{{ 'label.email'|trans }}</dt>
+            <dd>{{ comment.email }}</dd>
+            <dt>{{ 'label.nickname'|trans }}</dt>
+            <dd>{{ comment.nickname }}</dd>
+            <dt>{{ 'label.content'|trans }}</dt>
+            <dd>{{ comment.content }}</dd>
+
+        </dl>
+        <p>
+            <a href="{{ url('comment_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message.record_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
